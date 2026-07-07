@@ -42,7 +42,6 @@
   "dependencies": {
     "cordova-plugin-camera": "^7.0.0",
     "cordova-plugin-file": "^8.1.0",
-    "cordova-plugin-file-transfer": "^2.0.0",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-network-information": "^3.0.0",
     "cordova-background-geolocation-lt": "^4.10.0",
