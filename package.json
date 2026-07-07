@@ -5,7 +5,6 @@
   "description": "Offline Farm-to-Market Road (FMR) geotagging application.",
   "main": "index.js",
   "scripts": {
-    "postinstall": "cordova prepare",
     "build:android": "cordova build android",
     "build:ios": "cordova build ios",
     "prepare": "cordova prepare",
