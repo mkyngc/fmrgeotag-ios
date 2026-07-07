@@ -14,4 +14,6 @@ workflows:
       - cordova build ios --release
 
     artifacts:
-      - platforms/ios/build/**/*.ipa
+      - platforms/ios/**/*.ipa
+      - platforms/ios/**/*.xcarchive
+      - platforms/ios/build/**/*.app
