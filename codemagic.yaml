@@ -1,0 +1,15 @@
+workflows:
+  ios-build:
+    name: Cordova iOS Build
+
+    environment:
+      node: 20
+
+    scripts:
+      - npm install
+      - npm install -g cordova
+      - cordova platform add ios --no-save || true
+      - cordova build ios --release
+
+    artifacts:
+      - platforms/ios/build/**/*.ipa

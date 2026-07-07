@@ -1,0 +1,413 @@
+/* =========================================================
+   FMR Geotag App - Main Stylesheet
+   Theme: Modern, minimal, green agricultural
+   ========================================================= */
+
+:root {
+  --fmr-green-900: #0d3b1e;
+  --fmr-green-800: #12492a;
+  --fmr-green-700: #1b5e20;
+  --fmr-green-600: #2e7d32;
+  --fmr-green-500: #388e3c;
+  --fmr-green-400: #4caf50;
+  --fmr-green-100: #e8f5e9;
+  --fmr-amber: #f9a825;
+  --fmr-red: #c62828;
+  --fmr-bg: #f4f7f4;
+  --fmr-card-bg: #ffffff;
+  --fmr-text: #1a2e1e;
+  --fmr-text-muted: #5f6f63;
+  --fmr-border-radius: 16px;
+  --fmr-shadow: 0 2px 10px rgba(13, 59, 30, 0.08);
+  --fmr-shadow-lg: 0 8px 24px rgba(13, 59, 30, 0.14);
+  --fmr-transition: all 0.25s ease;
+}
+
+body.dark-mode {
+  --fmr-bg: #0f1712;
+  --fmr-card-bg: #172016;
+  --fmr-text: #eaf3ea;
+  --fmr-text-muted: #9db19f;
+  --fmr-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  --fmr-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  background: var(--fmr-bg);
+  color: var(--fmr-text);
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition: var(--fmr-transition);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+input, textarea { user-select: text; }
+
+/* ---------- App Shell ---------- */
+#app-root { min-height: 100%; display: flex; flex-direction: column; }
+
+.app-header {
+  background: linear-gradient(135deg, var(--fmr-green-800), var(--fmr-green-600));
+  color: #fff;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--fmr-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.app-header .back-btn {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.app-header .back-btn:active { background: rgba(255,255,255,0.3); }
+
+.app-header h1 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+}
+
+.app-header .header-sub {
+  font-size: 0.72rem;
+  opacity: 0.85;
+  font-weight: 400;
+  display: block;
+}
+
+.app-main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  padding-bottom: 90px;
+}
+
+/* ---------- Dashboard Cards ---------- */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 8px;
+}
+
+@media (min-width: 700px) {
+  .dashboard-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.dash-card {
+  background: var(--fmr-card-bg);
+  border-radius: var(--fmr-border-radius);
+  box-shadow: var(--fmr-shadow);
+  padding: 20px 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(0,0,0,0.03);
+  transition: var(--fmr-transition);
+  min-height: 140px;
+  justify-content: center;
+}
+
+.dash-card:active {
+  transform: scale(0.96);
+  box-shadow: var(--fmr-shadow-lg);
+}
+
+.dash-card .icon-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--fmr-green-600), var(--fmr-green-400));
+}
+
+.dash-card.card-pathway .icon-wrap { background: linear-gradient(135deg, #2e7d32, #8bc34a); }
+.dash-card.card-history .icon-wrap { background: linear-gradient(135deg, #37474f, #78909c); }
+.dash-card.card-export .icon-wrap { background: linear-gradient(135deg, #ef6c00, #f9a825); }
+.dash-card.card-settings .icon-wrap { background: linear-gradient(135deg, #455a64, #90a4ae); }
+.dash-card.card-about .icon-wrap { background: linear-gradient(135deg, #1565c0, #64b5f6); }
+
+.dash-card .label { font-weight: 600; font-size: 0.9rem; }
+.dash-card .sub-label { font-size: 0.72rem; color: var(--fmr-text-muted); }
+
+.dashboard-status-bar {
+  display: flex;
+  justify-content: space-between;
+  background: var(--fmr-card-bg);
+  border-radius: 14px;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--fmr-shadow);
+  font-size: 0.78rem;
+}
+
+.dashboard-status-bar .stat { text-align: center; flex: 1; }
+.dashboard-status-bar .stat b { display: block; font-size: 1rem; color: var(--fmr-green-700); }
+body.dark-mode .dashboard-status-bar .stat b { color: var(--fmr-green-400); }
+
+/* ---------- Forms ---------- */
+.fmr-form-group { margin-bottom: 16px; }
+.fmr-form-group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--fmr-text-muted);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.form-control, .form-select {
+  border-radius: 12px;
+  border: 1.5px solid #dfe6e0;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  background: var(--fmr-card-bg);
+  color: var(--fmr-text);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--fmr-green-500);
+  box-shadow: 0 0 0 3px rgba(76,175,80,0.15);
+}
+
+body.dark-mode .form-control, body.dark-mode .form-select {
+  border-color: #2b3a2c;
+}
+
+/* ---------- Buttons ---------- */
+.btn-fmr-primary {
+  background: linear-gradient(135deg, var(--fmr-green-600), var(--fmr-green-500));
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 14px;
+  font-weight: 600;
+  font-size: 1rem;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(46,125,50,0.3);
+}
+.btn-fmr-primary:active { transform: scale(0.98); }
+.btn-fmr-primary:disabled { opacity: 0.5; }
+
+.btn-fmr-danger {
+  background: linear-gradient(135deg, #c62828, #e53935);
+  color: #fff; border: none; border-radius: 14px; padding: 14px; font-weight: 600; width: 100%;
+}
+
+.btn-fmr-outline {
+  background: transparent;
+  border: 1.5px solid var(--fmr-green-500);
+  color: var(--fmr-green-700);
+  border-radius: 14px;
+  padding: 12px;
+  font-weight: 600;
+  width: 100%;
+}
+body.dark-mode .btn-fmr-outline { color: var(--fmr-green-400); }
+
+.btn-fmr-round {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: none;
+  font-size: 1.8rem;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  display: flex; align-items: center; justify-content: center;
+}
+.btn-fmr-round.capture { background: radial-gradient(circle at 30% 30%, #66bb6a, #1b5e20); }
+.btn-fmr-round.stop { background: radial-gradient(circle at 30% 30%, #ef5350, #b71c1c); }
+.btn-fmr-round.pause { background: radial-gradient(circle at 30% 30%, #ffca28, #ef6c00); }
+
+/* ---------- Live Survey / GPS HUD ---------- */
+.gps-hud {
+  background: var(--fmr-card-bg);
+  border-radius: var(--fmr-border-radius);
+  box-shadow: var(--fmr-shadow);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.gps-hud .hud-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+
+.gps-hud .hud-item .value { font-size: 1.05rem; font-weight: 700; color: var(--fmr-green-700); }
+body.dark-mode .gps-hud .hud-item .value { color: var(--fmr-green-400); }
+.gps-hud .hud-item .unit { font-size: 0.68rem; color: var(--fmr-text-muted); }
+
+.gps-signal-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+.gps-signal-dot.good { background: #43a047; box-shadow: 0 0 6px #43a047; }
+.gps-signal-dot.fair { background: #fbc02d; box-shadow: 0 0 6px #fbc02d; }
+.gps-signal-dot.poor { background: #e53935; box-shadow: 0 0 6px #e53935; }
+.gps-signal-dot.searching { background: #9e9e9e; animation: pulse 1.2s infinite; }
+
+@keyframes pulse { 0% {opacity:1;} 50% {opacity:0.3;} 100% {opacity:1;} }
+
+.segment-progress { display: flex; gap: 6px; margin: 14px 0; }
+.segment-progress .seg-pill {
+  flex: 1; height: 10px; border-radius: 6px; background: #e0e6e0; transition: var(--fmr-transition);
+}
+.segment-progress .seg-pill.done { background: var(--fmr-green-500); }
+.segment-progress .seg-pill.active { background: var(--fmr-amber); animation: pulse 1.4s infinite; }
+body.dark-mode .segment-progress .seg-pill { background: #263429; }
+
+.distance-ring-wrap { display: flex; justify-content: center; margin: 18px 0; }
+
+#map-container, .map-container {
+  width: 100%;
+  height: 260px;
+  border-radius: var(--fmr-border-radius);
+  overflow: hidden;
+  box-shadow: var(--fmr-shadow);
+  margin-bottom: 14px;
+  background: #dfe9df;
+}
+
+.toast-fmr {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--fmr-green-800);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  box-shadow: var(--fmr-shadow-lg);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  max-width: 90%;
+  text-align: center;
+}
+.toast-fmr.show { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+.toast-fmr.error { background: var(--fmr-red); }
+.toast-fmr.warn { background: var(--fmr-amber); color: #1a2e1e; }
+
+/* ---------- Lists (Previous Surveys) ---------- */
+.survey-list-item {
+  background: var(--fmr-card-bg);
+  border-radius: 14px;
+  box-shadow: var(--fmr-shadow);
+  padding: 14px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.survey-list-item .type-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 8px;
+  color: #fff;
+  text-transform: uppercase;
+}
+.type-badge.segment { background: var(--fmr-green-600); }
+.type-badge.pathway { background: #1565c0; }
+.survey-list-item .title { font-weight: 600; font-size: 0.92rem; }
+.survey-list-item .meta { font-size: 0.72rem; color: var(--fmr-text-muted); }
+.survey-list-item .chev { margin-left: auto; color: var(--fmr-text-muted); }
+
+.empty-state { text-align: center; padding: 60px 20px; color: var(--fmr-text-muted); }
+.empty-state i { font-size: 2.6rem; color: var(--fmr-green-400); margin-bottom: 14px; display: block; }
+
+/* ---------- Settings ---------- */
+.settings-section { margin-bottom: 22px; }
+.settings-section h6 {
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--fmr-text-muted);
+  margin-bottom: 10px;
+}
+.settings-row {
+  background: var(--fmr-card-bg);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  box-shadow: var(--fmr-shadow);
+}
+.settings-row .row-label { font-size: 0.9rem; font-weight: 500; }
+.settings-row .row-sub { font-size: 0.72rem; color: var(--fmr-text-muted); }
+
+.form-check-input:checked { background-color: var(--fmr-green-600); border-color: var(--fmr-green-600); }
+
+/* ---------- Photo Thumbnails ---------- */
+.photo-thumb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+.photo-thumb-grid img {
+  width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; box-shadow: var(--fmr-shadow);
+}
+
+/* ---------- Bottom Action Bar ---------- */
+.bottom-action-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--fmr-card-bg);
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+  display: flex;
+  gap: 10px;
+  z-index: 60;
+}
+
+.pathway-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-top: 10px;
+}
+
+/* ---------- Loading Overlay ---------- */
+.fmr-loading-overlay {
+  position: fixed; inset: 0; background: rgba(13,59,30,0.55);
+  display: none; align-items: center; justify-content: center; z-index: 2000; color: #fff; flex-direction: column; gap: 12px;
+}
+.fmr-loading-overlay.show { display: flex; }
+.spinner-ring {
+  width: 46px; height: 46px; border: 4px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Utility ---------- */
+.text-fmr-muted { color: var(--fmr-text-muted); }
+.fmr-section-title { font-weight: 700; font-size: 1rem; margin: 18px 0 10px; }
+.badge-accuracy-good { background: #43a047; }
+.badge-accuracy-fair { background: #fbc02d; color: #333; }
+.badge-accuracy-poor { background: #e53935; }

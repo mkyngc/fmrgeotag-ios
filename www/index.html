@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<<<<<<< HEAD
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
+            https://cordova.apache.org/docs/en/latest/
+        Some notes:
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="css/index.css">
+        <title>Hello World</title>
+    </head>
+    <body>
+        <div class="app">
+            <h1>Apache Cordova</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+        </div>
+        <script src="cordova.js"></script>
+        <script src="js/index.js"></script>
+    </body>
+=======
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover, user-scalable=no">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: file: filesystem: cdvfile: content:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: content: filesystem: cdvfile: blob:; connect-src 'self' file: content: filesystem: cdvfile: blob:;">
+<title>FMR Geotag</title>
+
+<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.css">
+<link rel="stylesheet" href="lib/leaflet/leaflet.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app-root">
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="app-header">
+    <button class="back-btn d-none" id="btn-back"><i class="bi bi-arrow-left"></i></button>
+    <div>
+      <h1 id="header-title">FMR Geotag</h1>
+      <span class="header-sub" id="header-sub">Offline Road Survey Tool</span>
+    </div>
+    <button class="back-btn" id="btn-network-indicator" title="Network status">
+      <i class="bi bi-wifi-off"></i>
+    </button>
+  </header>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <main class="app-main" id="app-main">
+
+    <!-- ---------- SCREEN: DASHBOARD ---------- -->
+    <section class="screen" id="screen-dashboard">
+      <div class="dashboard-status-bar">
+        <div class="stat"><b id="stat-projects">0</b>Projects</div>
+        <div class="stat"><b id="stat-segments">0</b>Segments</div>
+        <div class="stat"><b id="stat-tracks">0</b>Tracks</div>
+        <div class="stat"><b id="stat-storage">0MB</b>Storage</div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="dash-card card-segment" data-nav="survey50-setup">
+          <div class="icon-wrap"><i class="bi bi-signpost-split"></i></div>
+          <div class="label">New 50m Survey</div>
+          <div class="sub-label">4 x 50m segments</div>
+        </div>
+        <div class="dash-card card-pathway" data-nav="pathway-setup">
+          <div class="icon-wrap"><i class="bi bi-map"></i></div>
+          <div class="label">New Pathway Survey</div>
+          <div class="sub-label">Continuous track</div>
+        </div>
+        <div class="dash-card card-history" data-nav="history">
+          <div class="icon-wrap"><i class="bi bi-clock-history"></i></div>
+          <div class="label">Previous Surveys</div>
+          <div class="sub-label">View records</div>
+        </div>
+        <div class="dash-card card-export" data-nav="export">
+          <div class="icon-wrap"><i class="bi bi-file-earmark-zip"></i></div>
+          <div class="label">Export Data</div>
+          <div class="sub-label">ZIP / CSV / GPX</div>
+        </div>
+        <div class="dash-card card-settings" data-nav="settings">
+          <div class="icon-wrap"><i class="bi bi-gear"></i></div>
+          <div class="label">Settings</div>
+          <div class="sub-label">GPS / camera / theme</div>
+        </div>
+        <div class="dash-card card-about" data-nav="about">
+          <div class="icon-wrap"><i class="bi bi-info-circle"></i></div>
+          <div class="label">About</div>
+          <div class="sub-label">Version &amp; help</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- SCREEN: 50M SURVEY SETUP ---------- -->
+    <section class="screen d-none" id="screen-survey50-setup">
+      <form id="form-survey50-setup" autocomplete="off">
+        <div class="fmr-form-group">
+          <label>Project Name *</label>
+          <input class="form-control" name="projectName" required placeholder="e.g. Brgy. San Isidro FMR">
+        </div>
+        <div class="fmr-form-group">
+          <label>Barangay *</label>
+          <input class="form-control" name="barangay" required placeholder="Barangay">
+        </div>
+        <div class="fmr-form-group">
+          <label>Municipality *</label>
+          <input class="form-control" name="municipality" required placeholder="Municipality">
+        </div>
+        <div class="fmr-form-group">
+          <label>Province *</label>
+          <input class="form-control" name="province" required placeholder="Province">
+        </div>
+        <div class="fmr-form-group">
+          <label>Road Name *</label>
+          <input class="form-control" name="roadName" required placeholder="Road name">
+        </div>
+        <div class="fmr-form-group">
+          <label>Surveyor Name *</label>
+          <input class="form-control" name="surveyorName" required placeholder="Full name">
+        </div>
+        <div class="fmr-form-group">
+          <label>Remarks</label>
+          <textarea class="form-control" name="remarks" rows="2" placeholder="Optional remarks"></textarea>
+        </div>
+        <button type="submit" class="btn-fmr-primary"><i class="bi bi-play-fill"></i> Start Survey</button>
+      </form>
+    </section>
+
+    <!-- ---------- SCREEN: 50M SURVEY ACTIVE ---------- -->
+    <section class="screen d-none" id="screen-survey50-active">
+      <div class="gps-hud">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span><span class="gps-signal-dot searching" id="gps-dot-50"></span><span id="gps-status-text-50">Acquiring GPS...</span></span>
+          <span class="badge" id="accuracy-badge-50">-- m</span>
+        </div>
+        <div class="hud-grid">
+          <div class="hud-item"><div class="value" id="hud-distance-50">0.0</div><div class="unit">METERS</div></div>
+          <div class="hud-item"><div class="value" id="hud-remaining-50">50.0</div><div class="unit">TO NEXT (m)</div></div>
+          <div class="hud-item"><div class="value" id="hud-elevation-50">--</div><div class="unit">ELEV (m)</div></div>
+        </div>
+      </div>
+
+      <div id="map-container-50" class="map-container"></div>
+
+      <div class="segment-progress" id="segment-progress-bar">
+        <div class="seg-pill active" data-seg="1"></div>
+        <div class="seg-pill" data-seg="2"></div>
+        <div class="seg-pill" data-seg="3"></div>
+        <div class="seg-pill" data-seg="4"></div>
+      </div>
+
+      <div class="text-center mb-3">
+        <div class="fmr-section-title mb-0" id="current-segment-label">Segment 1 of 4</div>
+        <small class="text-fmr-muted" id="current-segment-hint">Walk 50 meters, then capture a photo.</small>
+      </div>
+
+      <div class="d-flex justify-content-center mb-3">
+        <button class="btn-fmr-round capture" id="btn-capture-segment"><i class="bi bi-camera-fill"></i></button>
+      </div>
+
+      <div class="photo-thumb-grid" id="segment-photo-preview"></div>
+
+      <button class="btn-fmr-danger mt-3" id="btn-abort-survey50"><i class="bi bi-x-circle"></i> Abort Survey</button>
+    </section>
+
+    <!-- ---------- SCREEN: PATHWAY SETUP ---------- -->
+    <section class="screen d-none" id="screen-pathway-setup">
+      <form id="form-pathway-setup" autocomplete="off">
+        <div class="fmr-form-group">
+          <label>Project Name *</label>
+          <input class="form-control" name="projectName" required placeholder="e.g. Brgy. San Isidro FMR">
+        </div>
+        <div class="fmr-form-group">
+          <label>Barangay *</label>
+          <input class="form-control" name="barangay" required placeholder="Barangay">
+        </div>
+        <div class="fmr-form-group">
+          <label>Municipality *</label>
+          <input class="form-control" name="municipality" required placeholder="Municipality">
+        </div>
+        <div class="fmr-form-group">
+          <label>Province *</label>
+          <input class="form-control" name="province" required placeholder="Province">
+        </div>
+        <div class="fmr-form-group">
+          <label>Road Name *</label>
+          <input class="form-control" name="roadName" required placeholder="Road name">
+        </div>
+        <div class="fmr-form-group">
+          <label>Surveyor *</label>
+          <input class="form-control" name="surveyorName" required placeholder="Full name">
+        </div>
+        <button type="submit" class="btn-fmr-primary"><i class="bi bi-play-fill"></i> Start Pathway</button>
+      </form>
+    </section>
+
+    <!-- ---------- SCREEN: PATHWAY ACTIVE ---------- -->
+    <section class="screen d-none" id="screen-pathway-active">
+      <div class="gps-hud">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span><span class="gps-signal-dot searching" id="gps-dot-pw"></span><span id="gps-status-text-pw">Acquiring GPS...</span></span>
+          <span class="badge" id="accuracy-badge-pw">-- m</span>
+        </div>
+        <div class="hud-grid">
+          <div class="hud-item"><div class="value" id="hud-distance-pw">0.0</div><div class="unit">DISTANCE (m)</div></div>
+          <div class="hud-item"><div class="value" id="hud-time-pw">00:00:00</div><div class="unit">ELAPSED</div></div>
+          <div class="hud-item"><div class="value" id="hud-speed-pw">0.0</div><div class="unit">SPEED (km/h)</div></div>
+        </div>
+        <div class="hud-grid mt-2">
+          <div class="hud-item"><div class="value" id="hud-elevation-pw">--</div><div class="unit">ELEV (m)</div></div>
+          <div class="hud-item"><div class="value" id="hud-heading-pw">--</div><div class="unit">HEADING</div></div>
+          <div class="hud-item"><div class="value" id="hud-points-pw">0</div><div class="unit">GPS PTS</div></div>
+        </div>
+      </div>
+
+      <div id="map-container-pw" class="map-container"></div>
+
+      <div class="pathway-controls">
+        <button class="btn-fmr-round pause" id="btn-pathway-pause"><i class="bi bi-pause-fill"></i></button>
+        <button class="btn-fmr-round capture" id="btn-pathway-photo"><i class="bi bi-camera-fill"></i></button>
+        <button class="btn-fmr-round stop" id="btn-pathway-stop"><i class="bi bi-stop-fill"></i></button>
+      </div>
+
+      <div class="photo-thumb-grid" id="pathway-photo-preview"></div>
+    </section>
+
+    <!-- ---------- SCREEN: HISTORY (PREVIOUS SURVEYS) ---------- -->
+    <section class="screen d-none" id="screen-history">
+      <div id="history-list-container"></div>
+    </section>
+
+    <!-- ---------- SCREEN: HISTORY DETAIL ---------- -->
+    <section class="screen d-none" id="screen-history-detail">
+      <div id="history-detail-container"></div>
+    </section>
+
+    <!-- ---------- SCREEN: EXPORT ---------- -->
+    <section class="screen d-none" id="screen-export">
+      <p class="text-fmr-muted">Select a project to export. Files are written to the device's FMR_Geotag export folder.</p>
+      <div id="export-project-list"></div>
+    </section>
+
+    <!-- ---------- SCREEN: SETTINGS ---------- -->
+    <section class="screen d-none" id="screen-settings">
+      <div class="settings-section">
+        <h6>GPS</h6>
+        <div class="settings-row">
+          <div><div class="row-label">GPS Accuracy Mode</div><div class="row-sub">High accuracy uses more battery</div></div>
+          <select class="form-select" style="width:auto" id="setting-gps-accuracy">
+            <option value="high">High</option>
+            <option value="balanced">Balanced</option>
+            <option value="low">Battery Saver</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h6>Camera</h6>
+        <div class="settings-row">
+          <div><div class="row-label">Photo Quality</div><div class="row-sub">Compression level</div></div>
+          <select class="form-select" style="width:auto" id="setting-photo-quality">
+            <option value="90">High (90%)</option>
+            <option value="70" selected>Medium (70%)</option>
+            <option value="50">Low (50%)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h6>Pathway Recording</h6>
+        <div class="settings-row">
+          <div><div class="row-label">Distance Interval</div><div class="row-sub">Meters between GPS points</div></div>
+          <input type="number" class="form-control" style="width:90px" id="setting-distance-interval" value="5" min="1">
+        </div>
+        <div class="settings-row">
+          <div><div class="row-label">Time Interval</div><div class="row-sub">Seconds between GPS points</div></div>
+          <input type="number" class="form-control" style="width:90px" id="setting-time-interval" value="5" min="1">
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h6>Storage</h6>
+        <div class="settings-row">
+          <div><div class="row-label">Offline Map Folder</div><div class="row-sub" id="setting-map-folder-path">FMR_Geotag/maps</div></div>
+        </div>
+        <div class="settings-row">
+          <div><div class="row-label">Default Export Folder</div><div class="row-sub" id="setting-export-folder-path">FMR_Geotag/exports</div></div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h6>Appearance</h6>
+        <div class="settings-row">
+          <div><div class="row-label">Dark Mode</div><div class="row-sub">Easier on the eyes in the field</div></div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="setting-dark-mode" style="width:2.5em;height:1.4em">
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h6>Danger Zone</h6>
+        <button class="btn-fmr-danger" id="btn-reset-app"><i class="bi bi-trash3"></i> Reset All Data</button>
+      </div>
+    </section>
+
+    <!-- ---------- SCREEN: ABOUT ---------- -->
+    <section class="screen d-none" id="screen-about">
+      <div class="text-center mt-4 mb-4">
+        <i class="bi bi-signpost-split" style="font-size:3.4rem;color:var(--fmr-green-600)"></i>
+        <h4 class="mt-2 mb-0">FMR Geotag</h4>
+        <p class="text-fmr-muted">Version 1.0.0</p>
+      </div>
+      <p>FMR Geotag is an offline-first field data collection tool for geotagging Farm-to-Market Roads. It supports fixed-interval 50-meter segment surveys as well as continuous pathway (track) recording, complete with photo capture, GPS metadata, and multi-format export.</p>
+      <p class="text-fmr-muted">All data is stored locally on the device using SQLite and the device file system. No internet connection is required at any point during data collection.</p>
+      <div class="settings-section mt-4">
+        <h6>Credits</h6>
+        <p class="text-fmr-muted mb-1">Built with Apache Cordova, Bootstrap 5, Leaflet, and JSZip.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== LOADING OVERLAY ===================== -->
+  <div class="fmr-loading-overlay" id="loading-overlay">
+    <div class="spinner-ring"></div>
+    <div id="loading-overlay-text">Working...</div>
+  </div>
+
+  <!-- ===================== TOAST ===================== -->
+  <div class="toast-fmr" id="toast-fmr"></div>
+
+</div>
+
+<!-- ===================== VENDOR LIBS (all local / offline) ===================== -->
+<script src="cordova.js"></script>
+<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="lib/leaflet/leaflet.js"></script>
+<script src="lib/jszip.min.js"></script>
+
+<!-- ===================== APP MODULES ===================== -->
+<script src="js/utils.js"></script>
+<script src="js/db.js"></script>
+<script src="js/folderCreator.js"></script>
+<script src="js/gps.js"></script>
+<script src="js/camera.js"></script>
+<script src="js/mapService.js"></script>
+<script src="js/exportManager.js"></script>
+<script src="js/survey50.js"></script>
+<script src="js/pathway.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/history.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+>>>>>>> e5f148e451309fa48d429e25e9fd38d1666762c1
+</html>
